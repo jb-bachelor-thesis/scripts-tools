@@ -82,7 +82,7 @@ while true; do
     # 3 runs per load level
     for i in 1 2 3; do
         echo "  Run $i:"
-        csv_file="$OUTDIR/result_${run_counter}.csv"
+        csv_file="$OUTDIR/result-$i-${run_counter}.csv"
         # Run hey with CSV output redirected to file
         hey -n "$requests" -c "$concurrency" -o csv "http://localhost:$PORT$URI" > "$csv_file"
         echo "    Saved CSV result to $csv_file"
