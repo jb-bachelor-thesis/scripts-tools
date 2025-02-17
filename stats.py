@@ -209,10 +209,22 @@ def plot_performance_graphs(batch_summary: pd.DataFrame, avg_batch_summary: pd.D
     # Throughput comparison (RPS vs Batch Size)
     plt.figure(figsize=(10, 6))
     plt.grid(True, which="both", ls="-", alpha=0.2)
-    plt.xlabel('Batch Size')
+    
+    # Configure axes
+    plt.xlabel('Total Requests')
     plt.ylabel('Requests per Second')
+    
+    # Set scales
     plt.yscale('log')
-    plt.xscale('log', base=2)  # Use log2 scale for batch size like in the example
+    plt.xscale('log', base=2)
+    
+    # Get unique batch sizes from data for x-axis ticks
+    xticks = sorted(avg_batch_summary['batch'].unique())
+    plt.xticks(xticks, [str(x) for x in xticks], rotation=45)
+    
+    # Ensure we show gridlines at our test points
+    plt.grid(True, which='major', linestyle='-', alpha=0.3)
+    plt.grid(True, which='minor', linestyle=':', alpha=0.2)
     
     # Plotting average RPS for each implementation
     markers = ['s-', 'o-', '^-']  # square, circle, triangle
