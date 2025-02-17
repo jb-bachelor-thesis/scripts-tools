@@ -82,3 +82,8 @@ fabric.properties
 # env
 .env
 *.env
+
+# data
+*.log
+**/cnc**
+5
